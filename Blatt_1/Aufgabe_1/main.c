@@ -33,6 +33,19 @@ int euklid_ggT_rec(int a, int b){
 }
 
 
+int kgV(int a, int b){
+
+    int i = 1;
+
+    while( !((i%a==0) && (i%b==0)) ){
+        i++;
+    }
+
+    return i;
+
+}
+
+
 int main(){
 
     int n = 32;
@@ -41,7 +54,9 @@ int main(){
 
 
     //res = euklid_ggT(n, m);
-    res = euklid_ggT_rec(n, m);
+    //res = euklid_ggT_rec(n, m);
+    res = kgV(n, m);
+
 
     printf("Result: %d\n", res);
 
