@@ -18,6 +18,20 @@ int euklid_ggT(int a, int b){
 }
 
 
+int euklid_ggT_rec(int a, int b){
+
+    int r = a % b;
+    a = b;
+    b = r;
+
+    if(r == 0){
+        return a;
+    }
+        
+    return euklid_ggT_rec(a, b);
+
+}
+
 
 int main(){
 
@@ -26,8 +40,8 @@ int main(){
     int res;
 
 
-    res = euklid_ggT(n, m);
-    
+    //res = euklid_ggT(n, m);
+    res = euklid_ggT_rec(n, m);
 
     printf("Result: %d\n", res);
 
