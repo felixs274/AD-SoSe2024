@@ -110,6 +110,12 @@ matrix *Mult(matrix *a, matrix *b){
 }
 
 
+void Free(matrix *m){
+    free(m->data);
+    free(m);
+}
+
+
 int main(){
     srand(time(NULL));
 
@@ -118,17 +124,12 @@ int main(){
     RandomFill(m1);
     printf("---=== M 1 ===---\n");
     Print(m1);
-    free(m1->data);
-    free(m1);
-
 
     //Matrix 2
     matrix *m2 = Init(3, 2);
     RandomFill(m2);
     printf("---=== M 2 ===---\n");
     Print(m2);
-    free(m2->data);
-    free(m2);
 
 
     /*
@@ -145,9 +146,12 @@ int main(){
     matrix *m4 = Mult(m1, m2);
     printf("---=== M 4 ===---\n");
     Print(m4);    
-    free(m4->data);
-    free(m4);
 
+
+    Free(m1);
+    Free(m2);
+    Free(m3);
+    Free(m4);
 
     return 0;
 
