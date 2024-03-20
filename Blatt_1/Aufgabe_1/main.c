@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 
-int euklid_ggT(int a, int b){
+int ggT(int a, int b){
 
     int r = 0;
 
@@ -18,7 +18,7 @@ int euklid_ggT(int a, int b){
 }
 
 
-int euklid_ggT_rec(int a, int b){
+int ggT_rec(int a, int b){
 
     int r = a % b;
     a = b;
@@ -28,7 +28,7 @@ int euklid_ggT_rec(int a, int b){
         return a;
     }
         
-    return euklid_ggT_rec(a, b);
+    return ggT_rec(a, b);
 
 }
 
@@ -53,11 +53,16 @@ int main(){
     int res;
 
 
-    //res = euklid_ggT(n, m);
-    //res = euklid_ggT_rec(n, m);
-    res = kgV(n, m);
+    //res = ggT(n, m);
+    //res = ggT_rec(n, m);
+    //res = kgV(n, m);
 
 
-    printf("Result: %d\n", res);
+    printf("kgV(%d, %d):   %d\n", n, m, kgV(n, m));
+    printf("ggT(%d, %d):   %d\n", n, m, ggT(n, m));
+    printf("%d x %d:       %d\n", n, m, (n*m));
+
+
+    //printf("Result: %d\n", res);
 
 }
