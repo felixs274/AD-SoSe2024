@@ -1,5 +1,5 @@
 /* 
-In Zusammenarbeit mit Daniel Heisig
+In Zusammenarbeit zwischen Daniel Heisig, Felix Scholzen & Simon Wagner
 */ 
 
 #include <stdio.h>
