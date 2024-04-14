@@ -1,6 +1,8 @@
+# # in Zusammenarbeit mit Simon Wagner, Felix Scholzen, Daniel Heisig entstanden
+
 import sys
 
-# tanken from https://svn.blender.org/svnroot/bf-blender/trunk/blender/build_files/scons/tools/bcolors.py
+# taken from https://svn.blender.org/svnroot/bf-blender/trunk/blender/build_files/scons/tools/bcolors.py
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -22,7 +24,7 @@ def printCombination(inp, x1, y1, x2, y2):
         print("|")
 
 
-# tanken from lecture
+# taken from lecture
 def getBiggestSum(row):
     s = 0
     aktSum = 0
