@@ -7,19 +7,6 @@
 #include <ctime>
 #include <random>
 
-/*
-void bubbleSort(std::vector<int>& arr) {
-    int n = arr.size();
-    for (int i = 0; i < n-1; ++i) {
-        for (int j = 0; j < n-i-1; ++j) {
-            if (arr[j] > arr[j+1]) {
-                std::swap(arr[j], arr[j+1]);
-            }
-        }
-    }
-}
- */
-
 void bubbleSort(std::vector<int>& a) {
     int n = a.size();
     for (int i = 0; i < n; i++) {
@@ -52,76 +39,6 @@ void quickSort(std::vector<int>& a, int f, int l) {
         quickSort(a, part + 1, l);
     }
 }
-/*
-void quickSort(std::vector<int>& arr, int low, int high) {
-    if (low < high) {
-        int pivot = arr[high];
-        int i = low - 1;
-        for (int j = low; j <= high - 1; ++j) {
-            if (arr[j] < pivot) {
-                ++i;
-                std::swap(arr[i], arr[j]);
-            }
-        }
-        std::swap(arr[i + 1], arr[high]);
-        int pi = i + 1;
-
-        quickSort(arr, low, pi - 1);
-        quickSort(arr, pi + 1, high);
-    }
-}
-*/
-/*
-void merge(std::vector<int>& arr, int l, int m, int r) {
-    int n1 = m - l + 1;
-    int n2 = r - m;
-
-    std::vector<int> L(n1), R(n2);
-
-    for (int i = 0; i < n1; ++i) {
-        L[i] = arr[l + i];
-    }
-    for (int j = 0; j < n2; ++j) {
-        R[j] = arr[m + 1 + j];
-    }
-
-    int i = 0, j = 0, k = l;
-
-    while (i < n1 && j < n2) {
-        if (L[i] <= R[j]) {
-            arr[k] = L[i];
-            ++i;
-        } else {
-            arr[k] = R[j];
-            ++j;
-        }
-        ++k;
-    }
-
-    while (i < n1) {
-        arr[k] = L[i];
-        ++i;
-        ++k;
-    }
-
-    while (j < n2) {
-        arr[k] = R[j];
-        ++j;
-        ++k;
-    }
-}
-
-
-
-void mergeSort(std::vector<int>& arr, int l, int r) {
-    if (l < r) {
-        int m = l + (r - l) / 2;
-        mergeSort(arr, l, m);
-        mergeSort(arr, m + 1, r);
-        merge(arr, l, m, r);
-    }
-}
-*/
 
 void merge(std::vector<int>& a, int f, int l, int m) {
     int i, n = l - f + 1;
@@ -175,8 +92,7 @@ int main() {
     auto end_bubble = std::chrono::system_clock::now();
     current_time = std::chrono::system_clock::to_time_t(end_bubble);
     std::chrono::duration<double> bubble_time = end_bubble - start_bubble;
-    double bubble_rate = n / bubble_time.count();
-    double bubble_elements_per_minute = bubble_rate * 60;
+    double bubble_elements_per_minute = n * (60/bubble_time.count());
     std::cout << "Finish Bubble Sort: " <<  std::ctime(&current_time) << std::endl;
 
     std::cout << "Start Quick Sort: ";
@@ -187,8 +103,7 @@ int main() {
     auto end_quick = std::chrono::system_clock::now();
     current_time = std::chrono::system_clock::to_time_t(end_quick);
     std::chrono::duration<double> quick_time = end_quick - start_quick;
-    double quick_rate = n / quick_time.count();
-    double quick_elements_per_minute = quick_rate * 60;
+    double quick_elements_per_minute = n * (60/quick_time.count());
     std::cout << "Finish Quick Sort: " << std::ctime(&current_time) << std::endl;
 
     std::cout << "Start Merge Sort: ";
@@ -199,14 +114,13 @@ int main() {
     auto end_merge = std::chrono::system_clock::now();
     current_time = std::chrono::system_clock::to_time_t(end_merge);
     std::chrono::duration<double> merge_time = end_merge - start_merge;
-    double merge_rate = n / merge_time.count();
-    double merge_elements_per_minute = merge_rate * 60;
+    double merge_elements_per_minute = n * (60/merge_time.count());
     std::cout << "Finish Merge Sort: " << std::ctime(&current_time) << std::endl;
 
     std::cout << "###########################################" << std::endl;
-    std::cout << "Bubble Sort: " << bubble_elements_per_minute << " Elemente / Minute\n";
-    std::cout << "Quick Sort: " << quick_elements_per_minute << " Elemente / Minute\n";
-    std::cout << "Merge Sort: " << merge_elements_per_minute << " Elemente / Minute\n";
+    std::cout << "Bubble Sort: " << int(bubble_elements_per_minute) << " Elemente / Minute\n";
+    std::cout << "Quick Sort:  " <<  int(quick_elements_per_minute) << " Elemente / Minute\n";
+    std::cout << "Merge Sort:  " <<  int(merge_elements_per_minute) << " Elemente / Minute\n";
     /*
      * Nur für kleine n sinnvoll: Bubble Sort: 6.29216e+06 Elemente / Minute
      * Quick Sort: 6.93809e+06 Elemente / Minute
