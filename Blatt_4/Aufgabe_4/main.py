@@ -1,3 +1,7 @@
+#
+# In Zusammenarbeit zwischen Daniel Heisig, Felix Scholzen & Simon Wagner
+#
+
 import random
 import copy
 
