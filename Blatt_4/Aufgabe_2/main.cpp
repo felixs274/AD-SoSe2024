@@ -1,3 +1,6 @@
+
+/*In Zusammenarbeit zwischen Daniel Heisig, Felix Scholzen & Simon Wagner entstanden.*/
+
 #include <iostream>
 #include <vector>
 #include <chrono>
