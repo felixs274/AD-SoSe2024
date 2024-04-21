@@ -4,6 +4,7 @@
 #include <ctime>
 #include <random>
 
+/*
 void bubbleSort(std::vector<int>& arr) {
     int n = arr.size();
     for (int i = 0; i < n-1; ++i) {
@@ -14,7 +15,41 @@ void bubbleSort(std::vector<int>& arr) {
         }
     }
 }
+ */
 
+void bubbleSort(std::vector<int>& a) {
+    int n = a.size();
+    for (int i = 0; i < n; i++) {
+        for (int j = n - 2; j >= i; j--){
+            if (a[j] > a[j+1]) {
+                std::swap(a[j], a[j + 1]);
+            }
+        }
+    }
+}
+
+void preparePartition(std::vector<int>& a, int f, int l, int &p) {
+// Pivot-Element
+    int pivot = a[f];
+    p = f - 1;
+    for (int i = f; i <= l; i++) {
+        if (a[i] <= pivot) {
+            p++;
+            std::swap(a[i], a[p]);
+        }
+        // Pivot an die richtige Stelle
+        std::swap(a[f], a[p]);
+    }
+}
+void quickSort(std::vector<int>& a, int f, int l) {
+    int part;
+    if (f < l) {
+        preparePartition(a, f, l,part);
+        quickSort(a, f, part - 1);
+        quickSort(a, part + 1, l);
+    }
+}
+/*
 void quickSort(std::vector<int>& arr, int low, int high) {
     if (low < high) {
         int pivot = arr[high];
@@ -32,7 +67,8 @@ void quickSort(std::vector<int>& arr, int low, int high) {
         quickSort(arr, pi + 1, high);
     }
 }
-
+*/
+/*
 void merge(std::vector<int>& arr, int l, int m, int r) {
     int n1 = m - l + 1;
     int n2 = r - m;
@@ -72,6 +108,8 @@ void merge(std::vector<int>& arr, int l, int m, int r) {
     }
 }
 
+
+
 void mergeSort(std::vector<int>& arr, int l, int r) {
     if (l < r) {
         int m = l + (r - l) / 2;
@@ -80,9 +118,37 @@ void mergeSort(std::vector<int>& arr, int l, int r) {
         merge(arr, l, m, r);
     }
 }
+*/
+
+void merge(std::vector<int>& a, int f, int l, int m) {
+    int i, n = l - f + 1;
+    int a1f = f, a1l = m - 1;
+    int a2f = m, a2l = l;
+    std::vector<int> anew(n);
+
+    for (i = 0;i < n; i++) {
+        if (a1f <= a1l) {
+            if (a2f <= a2l){
+                if(a[a1f] <= a[a2f]) anew[i] = a[a1f++];
+                else anew[i] = a[a2f++];
+            } else anew[i] = a[a1f++];
+        } else anew[i] = a[a2f++];
+    }
+    for (i = 0; i < n; i++) a[f + i] = anew[i];
+}
+
+void mergeSort(std::vector<int>& a, int f, int l) {
+    if(f < l){
+        int m = (f + l + 1) / 2;
+        mergeSort(a, f, m - 1);
+        mergeSort(a, m, l);
+        merge(a, f, l, m);
+    }
+}
+
 
 int main() {
-    int n = 20000000;       // Anzahl der zufälligen Zahlen für Merge / Quick Sort
+    int n = 7000000;       // Anzahl der zufälligen Zahlen für Merge / Quick Sort
     int j = 90000;          // Anzahl der zufälligen Zahlen für Bubble Sort
 
     std::vector<int> numbers_bubble(j);
@@ -138,6 +204,11 @@ int main() {
     std::cout << "Bubble Sort: " << bubble_elements_per_minute << " Elemente / Minute\n";
     std::cout << "Quick Sort: " << quick_elements_per_minute << " Elemente / Minute\n";
     std::cout << "Merge Sort: " << merge_elements_per_minute << " Elemente / Minute\n";
+    /*
+     * Nur für kleine n sinnvoll: Bubble Sort: 6.29216e+06 Elemente / Minute
+     * Quick Sort: 6.93809e+06 Elemente / Minute
+     * Merge Sort: 4.0627e+07 Elemente / Minute
+     */
 
     return 0;
 }
