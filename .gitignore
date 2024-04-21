@@ -12,6 +12,12 @@ a.out
 #VSCode
 .vscode
 
+# CLion temp files #
+####################
+cmake-build-debug/
+.idea/
+#CMakeLists.txt
+
 # User-specific files
 *.rsuser
 *.suo
