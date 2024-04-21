@@ -1,0 +1,24 @@
+Merge Sort:
+1. Aufteilen
+1.1 
+    Zuerst wird die liste in nodes aufgeteilt.
+    Dies passiert log_2 mal, da immer in der hälte aufgeteilt wird. ( log_2(n) )
+
+1.2
+    Bei jeden erzeugten node wird die Liste des Eltern Nodes durch itteriert wird zum kopieren der Zahlen.
+    Deswegen müssen die Zugriffe noch mit berücksichtigt werden (log_2(n) * n)
+
+2. Mergen
+2.1 zum mergen wird jedes Node druchlaufen und geschaut ob dieses ein node hat. ( log_2(n) )
+2.2 Beim mergen der zahlen wird auch nochmal für jedes teil array die zahlen iterriert. (log_2(n) * n)
+
+
+Damit kommen wir auf eine Laufzeit von:
+log_2(n) + log_2(n)*n + log_2(n) + log_2(n) * n
+= 
+2*log_2(n) + 2*log_2(n)*n
+
+Insertion sort:
+Da in jedem Rekursionsaufruf nur 1 mal die gleiche funktion aufgerufen wird, jedoch mit einen n um 1 kleiner, wird die funktion n mal aufgerufen
+Pro aufruf wird jetzt die while schleife n mal schlimmsten fall durchlaufen.
+Deswegen gibt sich eine laufzeit von n*n = n**2
