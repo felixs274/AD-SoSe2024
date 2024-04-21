@@ -56,15 +56,15 @@ def selection_sort(arr):
 
 # Task 1.4
 def quick_partition(arr, leftIdx, rightIdx):
-    pivotIdx = random.randint(leftIdx, rightIdx)  # Select a random pivot index within the given range
+    pivotIdx = random.randint(leftIdx, rightIdx)
     pivotVal = arr[pivotIdx]
-    swap(arr, pivotIdx, rightIdx)  # Move pivot element to the end
+    swap(arr, pivotIdx, rightIdx)
     p = leftIdx
     for i in range(leftIdx, rightIdx):
         if arr[i] <= pivotVal:
             swap(arr, i, p)
             p += 1
-    swap(arr, p, rightIdx)  # Move pivot element to its final sorted position
+    swap(arr, p, rightIdx)
     return p
 
 def quick_sort_rec(arr, leftIdx, rightIdx):
