@@ -60,29 +60,6 @@ def matrix_multiply(a,b):
 
 
 
-def strassen(A, B):
- 
-    start_time = time.time()
-
-    C = []
-
-    for i in range(N):
-     
-        for j in range( N):
-         
-            C[i][j] = 0
-            for k in range(N):
-             
-                C[i][j] += A[i][k]*B[k][j]
-    
-    # Pint Time
-    end_time = time.time()
-    duration = end_time - start_time
-    print(duration)
-
-    return C
-
-
 
 
 def main():
