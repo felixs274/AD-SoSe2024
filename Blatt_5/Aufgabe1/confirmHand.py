@@ -49,20 +49,68 @@ def ms(arr, i1, i2):
 def merge_sort(arr):
     return ms(arr, 0, len(arr)-1)
 
-def heapify(arr, idx = 0):
-    iMax = len(arr) - 1
-    lIdx = idx*2+1
-    rIdx = idx*2+2
 
-    if lIdx <= iMax and rIdx <= iMax:
-        heapify(arr, lIdx)
-        heapify(arr, rIdx)
-        insertIntoHeap(arr, idx, iMax)
-    elif lIdx <= iMax:
-        heapify(arr, lIdx)
-        insertIntoHeap(arr, idx, iMax)
-    else:
-        pass
+def heapify(arr, f, l, root):
+    largest = root
+    left = f + (root-f)*2+1
+    right = f + (root-f)*2+2
+
+    if left <= l and arr[left] > arr[root]:
+        largest = left
+
+    if right <= l and arr[right] > arr[largest]:
+        largest = right
+
+    if largest != root:
+        arr[root], arr[largest] = arr[largest], arr[root]
+        heapify(arr, f, l, largest)
+
+
+def build_heap(arr, f, l):
+    n = l - f + 1
+    for i in range(f + (n - 2) // 2, f - 1, -1):
+        heapify(arr, f, l, i)
+
+
+def print_heap(heap):
+
+    def get_children(idx):
+        left = 2*idx + 1
+        right = 2*idx + 2
+        children = []
+        if left < len(heap):
+            children.append(heap[left])
+        if right < len(heap):
+            children.append(heap[right])
+        return children
+
+    def calculate_height(heap_size):
+        height = 0
+        while 2 ** height - 1 < heap_size:
+            height += 1
+        return height
+
+    def print_level(level, height):
+        indent = " " * ((2 ** (height-1)-1)*3)
+        space = " " * ((2 ** height)-1)
+        print(indent, end="")
+        print(space.join([str(item).center(6) for item in level]))
+
+    level = [heap[0]]
+    heap_size = len(heap)
+    height = calculate_height(heap_size)
+    index = 0
+
+    while level:
+        print_level(level, height)
+
+        next_level = []
+        for item in level:
+            next_level.extend(get_children(index))
+            index += 1
+
+        level = next_level
+        height -= 1
 
 
 def insertIntoHeap(arr, idx, iMax):
@@ -101,7 +149,8 @@ def insertIntoHeap(arr, idx, iMax):
 
 
 def heap_sort(arr):
-    heapify(arr)
+    build_heap(arr, 0, len(arr)-1)
+    print_heap(arr)
 
     idxBack = len(arr) - 1
 
