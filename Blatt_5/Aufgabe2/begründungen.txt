@@ -1,0 +1,16 @@
+Die Aufgaben sind in zusammenarbeit mit Felix Scholzen und Daniel Heisig entstanden
+
+2.1)
+Ein heap mit n Elementen hat die Höhe [log n]
+
+Dies kann man beweisen, in dem ein heap in einen Array mit n Elementen dargestellt wird, und die nächsten Kind knoten mit der Formel 2i + 1 und 2i + 2 berechnet werden.
+Da jetzt die höhe eines Heaps mit der längsten Verzweigung angegeben wird, kann man mit der nächsten index formel ablesen. da dort der nächste knoten mit 2 i angegeben wird, ist dies: 2^i '(die 1 kann vernachläsigt werden).
+Daraus folgt: höhe = log_2(n)
+
+2.2)
+da beim binären Baum die Anzahl der Knoten pro Ebene 2^h entspricht (siehe Kind knoten Formel, jeder knoten hat 2 kind Knoten)
+wir müssen den Exponenten jetzt noch mit 1 addieren, da die unteren ebenen berücksichtigt werden. Da die basis 2 ist, kann man einfach 1 im exponenten Addieren. (Eigentlich muss man noch 1 vom ergebnis abziehen, aber kann vernachläsigt werden)
+Jetzt müssen wir dann noch die anzahl der insgesammten knoten teilen, um zu sehen wie weit die Letzte Ebene befüllt ist.
+
+2.4)
+Die Reihenfolge kann bedingt vertauscht werden, wenn immer zuerst von der Untersten Ebene Angefangen wird zu heapifyen. Die Oberen ebenen sind darauf angewießen, dass die unteren korrekt sind.
