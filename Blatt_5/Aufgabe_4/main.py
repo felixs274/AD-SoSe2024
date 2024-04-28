@@ -2,8 +2,6 @@ import time
 
 
 
-
-
 # Variante 1
 def variante1(M, N):
 
@@ -50,7 +48,6 @@ def variante2(M, N):
 
 
 
-
 def main():
 
     # Matrix M & N
@@ -59,10 +56,9 @@ def main():
 
     N = [[5, 6], [7, 8]]
 
-
-
     print(variante1(M, N))
     print(variante2(M, N))
 
   
+
 main()
