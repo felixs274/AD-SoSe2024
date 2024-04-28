@@ -7,10 +7,17 @@ import time
 # Variante 1
 def variante1(M, N):
 
+    start_time = time.time()
+
     O11 = M[0][0] * N[0][0] + M[0][1] * N[1][0]
     O12 = M[0][0] * N[0][1] + M[0][1] * N[1][1]
     O21 = M[1][0] * N[0][0] + M[1][1] * N[1][0]
     O22 = M[1][0] * N[0][1] + M[1][1] * N[1][1]
+
+    # Print Time
+    end_time = time.time()
+    duration = end_time - start_time
+    print(duration)
 
     return [[O11, O12], [O21, O22]]
 
@@ -18,6 +25,8 @@ def variante1(M, N):
 
 # Variante 2
 def variante2(M, N):
+
+    start_time = time.time()
 
     H1 = (M[0][0] + M[1][1]) * (N[0][0] + N[1][1])
     H2 = (M[1][0] + M[1][1]) * N[0][0]
@@ -32,32 +41,12 @@ def variante2(M, N):
     O21 = H2 + H4
     O22 = H1 - H2 + H3 + H6
 
-    return [[O11, O12], [O21, O22]]
-
-
-
-
-def matrix_multiply(a,b):
-
-    start_time = time.time()
-
-    c = []
-    for i in range(0,len(a)):
-        temp=[]
-        for j in range(0,len(b[0])):
-            s = 0
-            for k in range(0,len(a[0])):
-                s += a[i][k]*b[k][j]
-            temp.append(s)
-        c.append(temp)
-
-    # Pint Time
+    # Print Time
     end_time = time.time()
     duration = end_time - start_time
     print(duration)
 
-    return c
-
+    return [[O11, O12], [O21, O22]]
 
 
 
@@ -72,12 +61,8 @@ def main():
 
 
 
-    #print(variante1(M, N))
-    #print(variante2(M, N))
+    print(variante1(M, N))
+    print(variante2(M, N))
 
-    print(matrix_multiply(M, N))
-    print(strassen(M, N))
-   
-
-
+  
 main()
