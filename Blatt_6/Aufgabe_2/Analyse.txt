@@ -1,0 +1,11 @@
+#
+# in Zusammenarbeit mit Simon Wagner, Felix Scholzen und Daniel Heisig entstanden
+#
+
+Speicherkomplexität:
+    Die Speicherkomplexität beträgt O(n) da in Place sortiert wird.
+
+Laufzeitkomplexität:
+    da die Implementierung sich nicht groß von der Standard Quicksort Implementierung unterschiedet.
+    Er unterschiedet sich nur in der Partition Funktion. Dort wird anstatt ein Index ein Pointer auf den pivot und jetzigen Node gesetzt.
+    Deswegen gilt noch immer die log(n)*n Komplexität
