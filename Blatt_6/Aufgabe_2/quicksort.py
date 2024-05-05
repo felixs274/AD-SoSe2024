@@ -1,6 +1,6 @@
-#
-# in Zusammenarbeit mit Simon Wagner, Felix Scholzen und Daniel Heisig entstanden
-#
+###########################################################################################
+# In Zusammenarbeit zwischen Daniel Heisig, Felix Scholzen, Simon Wagner & Toni Kandziora #
+###########################################################################################
 
 import random
 
