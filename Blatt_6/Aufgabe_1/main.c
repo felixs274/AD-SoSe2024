@@ -1,6 +1,6 @@
-// ###########################################################################
-// # In Zusammenarbeit zwischen Daniel Heisig, Felix Scholzen & Simon Wagner #
-// ###########################################################################
+// ###########################################################################################
+// # In Zusammenarbeit zwischen Daniel Heisig, Felix Scholzen, Simon Wagner & Toni Kandziora #
+// ###########################################################################################
 
 
 #include <memory.h>
@@ -8,6 +8,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <unistd.h>
 
 
 void swap(int *a, int *b) {
@@ -19,9 +20,14 @@ void swap(int *a, int *b) {
 
 // ##### ARRAY FUNCTIONS #######################################################################################
 
-void fillArray(int* arr, int size, int maxVal){
+int randomInt(int minVal, int maxVal){
+    int n = minVal + rand() % (maxVal - minVal + 1);
+    return n;
+}
+
+void fillArray(int* arr, int size, int minVal, int maxVal){
     for(int i = 0; i < size; i++){
-        arr[i] = rand() % maxVal;
+        arr[i] = minVal + rand() % (maxVal - minVal + 1);
     }
 }
 
@@ -46,14 +52,16 @@ void printCharArr(unsigned char *arr, int size){
 // ##### COUNT SORT FUNCTIONS #######################################################################################
 
 int* countSort(int *arr, int k, int size){
+    clock_t start_time = clock(); // Start the clock for timing
 
     int *ret = calloc(size, sizeof(int));
     unsigned char *countArr = calloc(k, sizeof(unsigned char)); // Assume that we have max 255 values
+    int operations = 0; 
 
     for(int i = 0; i < size; i++){
         countArr[arr[i]]++; //! first n
+        operations++; 
     }
-
 
     //! we iterate over k and check, if we have a value in the array we do 3 operations.
     //! we will doe the 3 operations a max of n times, since we have at max n values in our count array stored
@@ -64,12 +72,19 @@ int* countSort(int *arr, int k, int size){
             ret[retIdx] = i;
             countArr[i]--;
             retIdx++;
+            operations += 3; // Three operations: assignment, decrement, increment of retIdx
         }
     }
 
     //! a total of k + 4n operations
 
     free(countArr);
+
+    clock_t end_time = clock(); 
+    double time_spent = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+
+    printf("%d,", operations);
+    printf("%f,", time_spent);
 
     return ret;
 }
@@ -80,34 +95,54 @@ int* countSort(int *arr, int k, int size){
 
 // ##### HEAP SORT FUNCTIONS #######################################################################################
 
-void heapify(int arr[], int n, int i) {
+void heapify(int arr[], int n, int i, int *steps) {
     int largest = i;
-    int left = 2*i + 1;
-    int right = 2*i + 2;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
 
-    if (left < n && arr[left] > arr[largest])
+    if (left < n && arr[left] > arr[largest]) {
         largest = left;
-    if (right < n && arr[right] > arr[largest])
+        (*steps)++;
+    }
+    if (right < n && arr[right] > arr[largest]) {
         largest = right;
+        (*steps)++;
+    }
     if (largest != i) {
         swap(&arr[i], &arr[largest]);
-        heapify(arr, n, largest);
+        (*steps)++;
+        heapify(arr, n, largest, steps);
     }
 }
 
 int* heapSort(int arr[], int n) {
+    clock_t start, end;
+    double cpu_time_used;
+    start = clock();
+
     int *sorted = calloc(n, sizeof(int));
 
-    for (int i = 0; i < n; i++)
+    int steps = 0; 
+
+    for (int i = 0; i < n; i++) {
         sorted[i] = arr[i];
+        steps++;
+    }
 
     for (int i = n / 2 - 1; i >= 0; i--)
-        heapify(sorted, n, i);
+        heapify(sorted, n, i, &steps);
 
     for (int i = n - 1; i > 0; i--) {
         swap(&sorted[0], &sorted[i]);
-        heapify(sorted, i, 0);
+        steps++;
+        heapify(sorted, i, 0, &steps);
     }
+
+    end = clock();
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+
+    printf("%d,", steps);
+    printf("%f,", cpu_time_used);
 
     return sorted;
 }
@@ -119,18 +154,16 @@ int* heapSort(int arr[], int n) {
 // ##### MAP SORT FUNCTIONS #######################################################################################
 
 int* mapSort(int a[], int n, double c) {
-    if (c <= 0) {
-        fprintf(stderr, "Scale factor must be positive.\n");
-        return NULL;
-    }
-
+    clock_t start = clock(); 
+    int steps = 0;
+    
     int newn = (int)(n * c);
+    if (newn == 0) newn = 1;
     int i, j = 0;
-    int *bin = (int *)calloc(newn, sizeof(int));
-    int *sorted = (int *)calloc(n, sizeof(int));
+    int *bin = calloc(newn, sizeof(int));
+    int *sorted = calloc(n, sizeof(int));
 
     if (!bin || !sorted) {
-        fprintf(stderr, "Memory allocation failed.\n");
         free(bin);
         free(sorted);
         return NULL;
@@ -138,76 +171,90 @@ int* mapSort(int a[], int n, double c) {
 
     for (i = 0; i < newn; i++) {
         bin[i] = -1;
+        steps++;
     }
 
     int max = INT_MIN, min = INT_MAX;
     for (i = 0; i < n; i++) {
         if (a[i] < min) min = a[i];
         if (a[i] > max) max = a[i];
+        steps += 2;
     }
 
-    if (min == max) { // All elements are the same
-        free(bin);
-        for (i = 0; i < n; i++) sorted[i] = min;
-        return sorted;
-    }
-
-    double dist = (double)(max - min) / (newn - 1);
+    double dist = max == min ? 1 : (double)(max - min) / (newn - 1);
+    steps++;
 
     for (i = 0; i < n; i++) {
         int t = (int)((a[i] - min) / dist);
-        if (t >= newn) t = newn - 1; // Edge case for the max element
-        int insert = a[i], left = 0;
+        if (t >= newn) t = newn - 1;
+        steps++;
 
-        while (bin[t] != -1 && bin[t] != insert) {
-            if (left) {
-                if (insert > bin[t]) {
-                    swap(&bin[t], &insert);
-                }
-                if (t > 0) t--;
-                else left = 0;
+        for (int inserted = 0; !inserted; ) {
+            steps++;
+            if (bin[t] == -1) {
+                bin[t] = a[i];
+                inserted = 1;
+            } else if (bin[t] != a[i]) {
+                swap(&bin[t], &a[i]);
+                t += (a[i] > bin[t]) ? -1 : 1;
+                if (t < 0 || t >= newn) break;
             } else {
-                if (insert <= bin[t]) {
-                    swap(&bin[t], &insert);
-                }
-                if (t < newn - 1) t++;
-                else left = 1;
+                inserted = 1;
             }
         }
-
-        bin[t] = insert;
     }
 
     for (i = 0; i < newn; i++) {
         if (bin[i] != -1) sorted[j++] = bin[i];
+        steps++;
     }
 
     free(bin);
+
+    clock_t end = clock(); 
+    double time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+
+    printf("%d,", steps);
+    printf("%f\n", time_spent);
     return sorted;
 }
+
 
 // ##### MAP SORT FUNCTIONS #######################################################################################
 
 
 
 
-int main(){
+void tester(int minVal, int maxVal){
 
-    size_t size = 20;
-    int k = 100;
     srand(time(NULL));
+    size_t size = randomInt(1000, 100000);
+    int min = minVal;
+    int max = maxVal;
     int* arr = malloc(size*sizeof(int));
 
-    fillArray(arr, size, k);
-    printArr(arr, size);
+    fillArray(arr, size, min, max);
+    //printArr(arr, size);
+    //printf("\n");
 
-    //int* countSortedArr = countSort(arr, k, size);
-    //int* countSortedArr = heapSort(arr, size);
-    int* countSortedArr = mapSort(arr, size, 30.0);
-    
-    printArr(countSortedArr, size);
+    printf("%ld,", size);
+
+    countSort(arr, max, size);
+    heapSort(arr, size);
+    mapSort(arr, size, 100.0);
 
     free(arr);
-    return 0;
 
+}
+
+
+int main(){
+
+    printf("ListSize,countSort_Ops,countSort_Time,heapSort_Ops,heapSort_Time,mapSort_Ops,mapSort_Time\n");
+
+    for(int i = 0; i < 1000; i++){
+        sleep(1);
+        tester(1000, 10000);
+    }
+    
 }
