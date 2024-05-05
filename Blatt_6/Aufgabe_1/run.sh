@@ -1,1 +1,1 @@
-gcc countsort.c -Wall && ./a.out && rm a.out
+gcc main.c -Wall && ./a.out && rm a.out
