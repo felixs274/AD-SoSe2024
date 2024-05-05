@@ -1,3 +1,8 @@
+// ###########################################################################
+// # In Zusammenarbeit zwischen Daniel Heisig, Felix Scholzen & Simon Wagner #
+// ###########################################################################
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
