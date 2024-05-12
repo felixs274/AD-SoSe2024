@@ -1,5 +1,7 @@
-#include <iostream> // Laufzeitkomplexität:
+// In Zusammenarbeit mit Simon Wagner, Toni Kandziora, Felix Scholzen, Daniel Heisig entstanden
 
+#include <iostream>
+// Laufzeitkomplexität:
 // Einfügen (iterativ oder rekursiv): Durchschnitt O(log n), im schlimmsten Fall O(n) (bei unbalancierten Bäumen)
 // Suche (iterativ): Durchschnitt O(log n), im schlimmsten Fall O(n) (bei unbalancierten Bäumen)
 // Löschen (rekursiv): Durchschnitt O(log n), im schlimmsten Fall O(n) (bei unbalancierten Bäumen)

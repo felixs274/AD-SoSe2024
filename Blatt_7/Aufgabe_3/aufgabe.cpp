@@ -1,3 +1,5 @@
+// In Zusammenarbeit mit Simon Wagner, Toni Kandziora, Felix Scholzen, Daniel Heisig entstanden
+
 #include <iostream>
 //AVL-Baum nach dem Einfügen: 1 2 3 4 5 6 8 9 10 11 12 13 14 15 16 
 //AVL-Baum nach dem Löschen: 1 2 9 10 11 13 16 
