@@ -1,0 +1,12 @@
+#
+# In Zusammenarbeit mit Simon Wagner, Toni Kandziora, Daniel Heisig, Felix Scholzen entstanden
+#
+
+Die formel
+Pk = (1/m)^k * (1 - 1/m)^(n-k) * (n über k)
+
+gibt an, dass genau k von n schlüssel in eine bestimmte position in der hashtabelle fallen.
+
+(1/m)^k ist die Wahrscheinlichkeit, dass jeder der k Schlüssel in genau diesen Slot fällt.
+(1 - 1/m)^(n-k) ist die Wahrscheinlichkeit, dass die restlichen n - k Schlüssel nicht in diesen Slot fallen.
+(n über k) ist die Anzahl der Möglichkeiten, k Schlüssel aus n auszuwählen.
