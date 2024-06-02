@@ -1,0 +1,52 @@
+### Problemstellung:
+- Text der Länge n.
+- Muster der Länge m.
+- Beide, Text und Muster, sind zufällig und gleichverteilt aus einem Alphabet mit |Σ| ≥ 2 Buchstaben gewählt.
+
+### Erwartete Anzahl an Buchstabenvergleichen:
+1. Positionen zum Vergleichen:
+   Das Muster kann an (n - m + 1) verschiedenen Positionen im Text gestartet werden.
+
+2. Wahrscheinlichkeit eines Matches:
+   Wahrscheinlichkeit, dass zwei Buchstaben übereinstimmen, ist 1/|Σ|.
+
+3. Erwartete Vergleiche pro Position:
+   Im Durchschnitt bis zu m Vergleiche pro Position.
+
+Die erwartete Anzahl der Vergleiche ist:
+
+Erwartete Anzahl an Vergleichen = (n - m + 1) * Σ(i=1 bis m) (1/|Σ|^i)
+
+Diese Summe ist eine geometrische Reihe:
+
+Σ(i=1 bis m) (1/|Σ|^i) = ((1/|Σ|) * (1 - (1/|Σ|)^m)) / (1 - (1/|Σ|)) = (1 - (1/|Σ|^m)) / (|Σ| - 1)
+
+### Einsetzen der Formel:
+Setzen wir diese Formel ein:
+
+Erwartete Anzahl an Vergleichen = (n - m + 1) * (1 - (1/|Σ|^m)) / (|Σ| - 1)
+
+Für große n und m, insbesondere wenn m << n, wird (1/|Σ|^m) vernachlässigbar:
+
+Erwartete Anzahl an Vergleichen ≈ (n - m + 1) * (1 / (|Σ| - 1))
+
+Da |Σ| konstant ist:
+
+Erwartete Anzahl an Vergleichen ≈ k * (n - m + 1)
+
+wobei k eine Konstante ist.
+
+### Laufzeit im Average Case:
+Die erwartete Anzahl der Vergleiche im Average Case ist proportional zu (n - m + 1):
+
+Θ(n)
+
+Die Aussage folgt aus der Formel:
+
+(n - m + 1) * (1 - (1/|Σ|^m)) / (|Σ| - 1)
+
+die abgeschätzt wird als:
+
+Θ(n)
+
+Das zeigt, dass der NaiveSearch-Algorithmus im Average Case eine Laufzeit von Θ(n) hat.
