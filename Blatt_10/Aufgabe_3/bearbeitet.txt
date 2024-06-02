@@ -1,3 +1,8 @@
+#
+# In Zusammenarbeit mit Simon Wagner, Toni Kandziora, Daniel Heisig, Felix Scholzen entstanden
+#
+
+
 ### Problemstellung:
 - Text der Länge n.
 - Muster der Länge m.

@@ -1,4 +1,6 @@
-
+#
+# In Zusammenarbeit mit Simon Wagner, Toni Kandziora, Daniel Heisig, Felix Scholzen entstanden
+#
 
 def search(wholeString, pattern):
     matches = []
