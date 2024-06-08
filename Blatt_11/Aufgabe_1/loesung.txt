@@ -1,0 +1,8 @@
+1)
+ - G ist ein ungerichteter Graph, da 0 auf 2 und 2 auf 0 zeigt.
+
+2)
+ - implementiert in search.py
+
+3)
+m beschreibt die verbindung, die vom knoten n aus geht
