@@ -1,3 +1,8 @@
+#
+# In Zusammenarbeit mit Simon Wagner, Toni Kandziora, Daniel Heisig, Felix Scholzen entstanden
+#
+
+
 def breitensuche(graph):
     # 0 = unvisted, 1 = in search, 2 = visited
     nodes = {k:0 for k in list(graph.keys())}

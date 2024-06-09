@@ -1,3 +1,7 @@
+#
+# In Zusammenarbeit mit Simon Wagner, Toni Kandziora, Daniel Heisig, Felix Scholzen entstanden
+#
+
 
 def checkCycle(graph, tosearch=0, nodes=None):
     if nodes is None:

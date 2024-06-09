@@ -1,3 +1,8 @@
+#
+# In Zusammenarbeit mit Simon Wagner, Toni Kandziora, Daniel Heisig, Felix Scholzen entstanden
+#
+
+
 1)
  - G ist ein ungerichteter Graph, da 0 auf 2 und 2 auf 0 zeigt.
 
