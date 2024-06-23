@@ -1,5 +1,8 @@
-inf = float("inf")
+import copy
 
+
+inf = float("inf")
+null = "NULL"
 
 class InputGraph:
     def __init__(self):
@@ -13,14 +16,18 @@ class InputGraph:
         ]
 
 
-class SolveApsp:
+class SolveFloyd:
     def __init__(self, initgraph):
         self.initgraph = initgraph
         self.edges = self.constructEdges()
-        self.distmatrix = [[inf]*len(initgraph.edges)
-                           for _ in range(len(initgraph.edges))]
-        self.vorgaengermatrix = [[inf]*len(initgraph.edges)
+        self.distmatrix = copy.deepcopy(self.initgraph.edges)
+        self.vorgaengermatrix = [[null]*len(initgraph.edges)
                                  for _ in range(len(initgraph.edges))]
+        
+        for node, edges in self.edges.items():
+            for destNode in edges.keys():
+                self.vorgaengermatrix[node][destNode] = node
+
 
     def constructEdges(self):
         edges = {node: {edge: value for edge, value in enumerate(self.initgraph.edges[node]) if value != inf}
@@ -28,20 +35,14 @@ class SolveApsp:
 
         return edges
 
-    def iterForPoint(self, startPoint):
-        distVector = self.distmatrix[startPoint]
-        vorgaengerVector = self.vorgaengermatrix[startPoint]
+    def solve(self):
+        vlen = len(self.edges.keys()) 
+        for k in range(vlen):
+            for i in range(vlen):
+                for j in range(vlen):
+                    self.distmatrix
 
-        distVector[startPoint] = 0
-        vorgaengerVector[startPoint] = "x"
-        for _ in range(len(distVector) - 1):
-            for node, edges in self.edges.items():
-                for outgoingEdgeNode, value in edges.items():
-
-                    if distVector[outgoingEdgeNode] == inf or \
-                            distVector[node] + value < distVector[outgoingEdgeNode]:
-                        distVector[outgoingEdgeNode] = distVector[node] + value
-                        vorgaengerVector[outgoingEdgeNode] = node
+        
 
     def printState(self):
 
@@ -63,11 +64,8 @@ class SolveApsp:
 
 def main():
     inp = InputGraph()
-    solve = SolveApsp(inp)
-
-    for node in range(len(inp.edges)):
-        solve.iterForPoint(node)
-        solve.printState()
+    solve = SolveFloyd(inp)
+    solve.solve()
 
 
 main()
