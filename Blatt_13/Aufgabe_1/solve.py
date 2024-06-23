@@ -1,4 +1,9 @@
+#
+# In Zusammenarbeit mit Simon Wagner, Toni Kandziora, Daniel Heisig, Felix Scholzen entstanden
+#
+
 inf = float("inf")
+null = "null"
 
 
 class InputGraph:
@@ -19,7 +24,7 @@ class SolveApsp:
         self.edges = self.constructEdges()
         self.distmatrix = [[inf]*len(initgraph.edges)
                            for _ in range(len(initgraph.edges))]
-        self.vorgaengermatrix = [[inf]*len(initgraph.edges)
+        self.vorgaengermatrix = [[null]*len(initgraph.edges)
                                  for _ in range(len(initgraph.edges))]
 
     def constructEdges(self):

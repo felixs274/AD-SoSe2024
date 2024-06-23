@@ -1,3 +1,7 @@
+#
+# In Zusammenarbeit mit Simon Wagner, Toni Kandziora, Daniel Heisig, Felix Scholzen entstanden
+#
+
 import copy
 
 
@@ -40,7 +44,11 @@ class SolveFloyd:
         for k in range(vlen):
             for i in range(vlen):
                 for j in range(vlen):
-                    self.distmatrix
+                    refVal = self.distmatrix[i][k] + self.distmatrix[k][j]
+                    if refVal < self.distmatrix[i][j]:
+                        self.distmatrix[i][j] = refVal
+                        self.vorgaengermatrix[i][j] = k
+            self.printState()
 
         
 
