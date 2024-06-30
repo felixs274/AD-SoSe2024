@@ -1,0 +1,35 @@
+#
+# In Zusammenarbeit mit Simon Wagner, Toni Kandziora, Daniel Heisig, Felix Scholzen entstanden
+#
+
+1:
+ein beispiel hierfür wären folgende matritzen:
+M1 = 10x30
+M2 = 30x5
+M3 = 5x60
+
+Erste Anordung: (M1 * M2) * M3
+ Kosten für: (M1 * M2) = 10 * 30 * 5 = 1500
+
+ die resultierende matrix hat eine anordnung von 10 x 5
+ die zweite rechnung ist nun folglich:
+ somit sind die kosten: 10 * 5 * 60 = 3000
+
+ somit kosten von 1500 + 3000 = 4500
+
+Zweite Anordung: M1 * (M2 * M3)
+
+  Kosten für (M2 * M3) = 30 * 5 * 60 = 9000
+
+  resultierende matrix hat 30x60
+
+  Kosten für 2 multiplikation somit = 10 * 30 * 60 = 18000
+  
+  somit gesamtkosten von 9000 + 18000 = 27000
+
+2:
+siehe matrixchain.py
+
+3:
+
+die laufzeit ist n^3, da 3 schleifen verwendet werden, die alle gegen n itterieren
