@@ -1,0 +1,15 @@
+HK <=_p TSP:
+
+HK lässt sich in polinomieller zeit auf TSP reduzieren durch folgenden Algorithmus:
+Zuerst müssen die gewichte in w alle auf 1 gesetzt werden. k muss nun auf die anzahl der knoten des graphen gesetzt werden.
+Hierdurch muss jetzt genau eine Kante benutzt werden, um zum nächsten Knoten zu kommen (und wieder zum Startknoten)
+Dadurch gibt der TSP den Hamilton Kreis aus.
+
+Wann ist TSP NP vollständig:
+
+sie ist teil von NP:
+- es ist keine Lösung des Problems bekannt die in polynomieller Zeit gelöst werden kann
+- sie kann in polynomieller Zeit überprüft werden (die knoten durchlaufen, und in einen anderen array speichern, wie oft ein knoten abgelaufen wurde. Danach durch das array gehen und überprüfen, ob bei jeden knoten eine 1 steht)
+
+NP hart:
+der TSP ist np hart, da der Hamilton Kreis NP hart ist. D.h. Wäre der TSP nicht np hart, dann wäre auch der Hamilton kreis nicht NP hart (da sich der Hamilton Kreis ja zum TSP transformiert werden kann)
