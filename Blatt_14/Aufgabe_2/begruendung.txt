@@ -1,3 +1,7 @@
+#
+# In Zusammenarbeit mit Simon Wagner, Toni Kandziora, Daniel Heisig, Felix Scholzen entstanden
+#
+
 HK <=_p TSP:
 
 HK lässt sich in polinomieller zeit auf TSP reduzieren durch folgenden Algorithmus:
