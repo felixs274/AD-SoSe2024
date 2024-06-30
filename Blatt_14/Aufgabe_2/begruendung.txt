@@ -17,3 +17,7 @@ sie ist teil von NP:
 
 NP hart:
 der TSP ist np hart, da der Hamilton Kreis NP hart ist. D.h. Wäre der TSP nicht np hart, dann wäre auch der Hamilton kreis nicht NP hart (da sich der Hamilton Kreis ja zum TSP transformiert werden kann)
+
+
+wann ist HK element von P:
+wenn ein Algorithmus gefunden wird, der es ermöglicht das Problem innerhalb von polynomieller Zeit zu lösen
