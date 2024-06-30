@@ -1,0 +1,27 @@
+#
+# In Zusammenarbeit mit Simon Wagner, Toni Kandziora, Daniel Heisig, Felix Scholzen entstanden
+#
+
+1:
+
+bei 2 part:
+true, da
+ - man für I = {1, 2} auswählen kann, was als summe 2 + 1 = 3 ergibt.
+ - somit ergeben sind die restlichen elemente {3, 4} was 1 + 2 = 3 ergibt.
+ - somit sind die ergebnise gleich.
+
+bei 3 part:
+true, da
+ - man für I_1 = {1} mit summe 2
+ - man für I_2 = {3} mit summe 2
+ - den rest {2,3} mit 1+1 = summe 2
+ auswählen kann
+
+2:
+3-Part liegt in np, da man das ergebnis in polynomieller zeit sich folglich überprüfen lassen kann:
+  - man schaut, ob die 3 mengen sich nicht überlappen (array aufspannen, jeweils über I_1 und I_2 iterrieren, und den eintrag im array anstreichen. wenn ein eintrag schonmal markiert wurde, ist das ergebnis falsch). laufzeit n, da n knoten
+  - man summiert jede knoten in I_1 und I_2 und die knoten, die nicht in beiden sind und überprüft, ob sie die 3 summen übereinstimmen (laufzeit von n)
+
+3:
+dies ist möglich, in dem man I_1 oder I_2 mit der leeren menge belegt.
+
